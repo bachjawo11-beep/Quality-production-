@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior: smooth;">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Samba | Cinematic Premium Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+<style>
+:root{
+  --primary:#38bdf8;
+  --secondary:#0ea5e9;
+  --bg-dark:#0f172a;
+  --bg-light:#f5f5f5;
+  --text-dark:#111827;
+  --text-light:#f8fafc;
+  --card-bg:#020617;
+  --card-hover:#0ea5e9;
+  --transition:.5s ease;
+}
+
+/* ===== GENERAL ===== */
+body{
+  margin:0;
+  font-family:'Inter',sans-serif;
+  background:var(--bg-dark);
+  color:var(--text-light);
+  overflow-x:hidden;
+  transition: background var(--transition), color var(--transition);
+}
+a{text-decoration:none;}
+h1,h2,p{margin:0 0 15px 0;}
+
+/* ===== NAVBAR ===== */
+nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px 40px;
+  background:rgba(2,6,23,0.85);
+  position:sticky;
+  top:0;
+  z-index:100;
+  backdrop-filter:blur(10px);
+}
+nav h2{
+  color:var(--primary);
+  font-weight:700;
+  font-size:26px;
+}
+nav a{
+  margin-left:25px;
+  color:white;
+  font-weight:600;
+  position:relative;
+  transition:.3s;
+}
+nav a::after{
+  content:'';
+  position:absolute;
+  width:0;
+  height:2px;
+  background:var(--primary);
+  left:0;
+  bottom:-5px;
+  transition:.3s;
+}
+nav a:hover::after{width:100%;}
+nav a:hover{color:var(--secondary);}
+.theme-toggle{cursor:pointer; font-size:20px; margin-left:20px; transition:color .3s;}
+#progress-bar{position:fixed; top:0; left:0; height:5px; background:var(--primary); width:0%; z-index:101; transition:width .25s ease;}
+
+/* ===== PARTICLE CANVAS ===== */
+#particles{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index:0;
+}
+
+/* ===== HERO ===== */
+.hero{
+  position:relative;
+  text-align:center;
+  padding:180px 20px;
+  overflow:hidden;
+}
+.hero h1{
+  font-size:48px;
+  font-weight:700;
+  position:relative;
+  z-index:2;
+  color:white;
+  text-shadow:0 0 15px rgba(56,189,248,.8);
+}
+.hero .rotating-text{
+  background:linear-gradient(90deg,#38bdf8,#0ea5e9);
+  -webkit-background-clip:text;
+  color:transparent;
+  font-weight:bold;
+  display:inline-block;
+  min-width:250px;
+  transition:all .7s ease-in-out;
+}
+.hero p{
+  font-size:20px;
+  margin-top:15px;
+  opacity:0;
+  transform:translateY(20px);
+  transition:opacity 1s ease, transform 1s ease;
+}
+.btn{
+  margin-top:30px;
+  padding:16px 32px;
+  background:var(--primary);
+  border:none;
+  color:black;
+  cursor:pointer;
+  font-weight:700;
+  border-radius:14px;
+  transition:all .5s;
+  box-shadow:0 10px 30px rgba(0,0,0,0.3);
+  opacity:0;
+  transform:translateY(20px);
+}
+.btn:hover{
+  transform:scale(1.1);
+  background:var(--secondary);
+  color:white;
+  box-shadow:0 0 25px var(--primary);
+}
+
+/* ===== SECTIONS ===== */
+.section{
+  padding:100px 20px;
+  text-align:center;
+  opacity:0;
+  transform:translateY(50px);
+  transition:all .8s ease-out;
+}
+.section.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+#cyber, #contact{
+  background:#111827;
+  border-radius:22px;
+  margin:30px auto;
+  padding:60px;
+  max-width:950px;
+}
+#projects{
+  max-width:1200px;
+  margin:0 auto;
+}
+
+/* ===== PROJECT CARDS ===== */
+.projects{
+  display:flex;
+  flex-direction:column;
+  gap:30px;
+  margin-top:30px;
+  perspective:1000px;
+}
+.card{
+  background:var(--card-bg);
+  padding:25px;
+  border-radius:22px;
+  transition:.5s;
+  cursor:pointer;
+  box-shadow:0 10px 30px rgba(0,0,0,.4);
+  position:relative;
+  transform-style: preserve-3d;
+}
+.card:hover{
+  transform:scale(1.05) rotateY(5deg);
+  box-shadow:0 20px 50px rgba(56,189,248,.7);
+}
+.card img{
+  width:100%;
+  border-radius:18px;
+  margin-bottom:15px;
+  transition:.3s;
+  display:block;
+}
+.card:hover img{transform:scale(1.05);}
+.card .overlay{
+  position:absolute;
+  top:0; left:0; width:100%; height:100%;
+  background:rgba(0,0,0,0.75);
+  color:white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  opacity:0;
+  text-align:center;
+  border-radius:22px;
+  transition:.3s;
+  font-size:16px;
+  font-weight:600;
+}
+.card:hover .overlay{opacity:1;}
+@media(min-width:768px){
+  .projects{
+    flex-direction:row; 
+    justify-content:center; 
+    flex-wrap:wrap;
+  }
+  .card{width:300px;}
+}
+
+/* ===== TESTIMONIALS ===== */
+.testimonials{
+  position:relative; 
+  margin:50px auto;
+}
+.testimonial{
+  display:none;
+  padding:30px;
+  background:#020617;
+  border-radius:20px;
+  font-size:18px;
+  line-height:1.6;
+  box-shadow:0 10px 30px rgba(0,0,0,0.3);
+  opacity:0;
+  transform:translateY(30px);
+  transition:all 0.8s ease-out;
+}
+.testimonial.active{
+  display:block; 
+  opacity:1; 
+  transform:translateY(0);
+}
+.testimonial p{margin-bottom:15px;}
+.testimonial h4{font-weight:700; color:var(--primary);}
+.testimonial-controls{
+  margin-top:15px;
+}
+.testimonial-controls span{
+  display:inline-block; 
+  width:12px; 
+  height:12px; 
+  background:#38bdf8; 
+  border-radius:50%; 
+  margin:0 5px; 
+  cursor:pointer; 
+  opacity:.5; 
+  transition:.3s;
+}
+.testimonial-controls span.active{
+  opacity:1; 
+  transform:scale(1.2);
+}
+.testimonial-controls span:hover{opacity:1;}
+
+/* ===== CONTACT ===== */
+input,textarea{
+  width:95%; 
+  padding:16px; 
+  margin:10px 0;
+  border:none; 
+  border-radius:14px;
+  font-size:16px; 
+  background:#1e293b; 
+  color:white; 
+  transition:.5s; 
+  display:block;
+}
+input:focus,textarea:focus{
+  outline:none; 
+  background:#1f2a46; 
+  box-shadow:0 0 12px var(--primary);
+}
+.btn-contact{
+  margin-top:18px; 
+  opacity:0; 
+  transform:translateY(20px); 
+  transition:all .8s ease;
+}
+footer{
+  text-align:center; 
+  padding:30px; 
+  background:#020617; 
+  margin-top:50px; 
+  font-size:14px; 
+  color:#a1a1aa;
+}
+</style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+<div id="progress-bar"></div>
+
+<!-- NAVBAR -->
+<nav>
+<h2>Samba</h2>
+<div>
+  <a href="#">Home</a>
+  <a href="#projects">Projects</a>
+  <a href="#contact">Contact</a>
+  <i class="ri-sun-line theme-toggle" id="theme-toggle"></i>
+</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>I am a <span class="rotating-text">Web Developer</span></h1>
+  <p>I design fast, responsive, and secure websites that attract clients.</p>
+  <button class="btn" onclick="document.getElementById('contact').scrollIntoView();">Contact Me</button>
+</section>
+
+<!-- CYBERSECURITY SECTION -->
+<section class="section" id="cyber">
+  <h2>Cybersecurity Awareness</h2>
+  <p>Stay safe online by avoiding phishing, using strong passwords, and protecting your data.</p>
+</section>
+
+<!-- PROJECTS -->
+<section class="section" id="projects">
+  <h2>My Projects</h2>
+  <div class="projects">
+    <div class="card">
+      <img data-src="https://via.placeholder.com/300x160.png?text=Project+1" alt="Project 1" class="lazy">
+      Portfolio Website
+      <div class="overlay">HTML, CSS, JS</div>
+    </div>
+    <div class="card">
+      <img data-src="https://via.placeholder.com/300x160.png?text=Project+2" alt="Project 2" class="lazy">
+      Landing Page
+      <div class="overlay">React, Tailwind</div>
+    </div>
+    <div class="card">
+      <img data-src="https://via.placeholder.com/300x160.png?text=Project+3" alt="Project 3" class="lazy">
+      Coming Soon...
+      <div class="overlay">Next.js, Node.js</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section" id="testimonials">
+  <h2>Client Testimonials</h2>
+  <div class="testimonials">
+    <div class="testimonial active">
+      <p>"Samba transformed our website into a modern, cinematic platform that our clients love."</p>
+      <h4>- Client A</h4>
+    </div>
+    <div class="testimonial">
+      <p>"Fast, professional, and innovative! Highly recommended."</p>
+      <h4>- Client B</h4>
+    </div>
+    <div class="testimonial">
+      <p>"His attention to detail and modern design sense is exceptional."</p>
+      <h4>- Client C</h4>
+    </div>
+    <div class="testimonial-controls">
+      <span class="active"></span><span></span><span></span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <h2>Contact Me</h2>
+  <form action="mailto:youremail@example.com" method="post" enctype="text/plain">
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="email" name="email" placeholder="Your Email" required>
+    <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+    <button type="submit" class="btn btn-contact">Send Email</button>
+  </form>
+  <br>
+  <a href="https://wa.me/220XXXXXXXX" target="_blank"><button class="btn btn-contact">Chat on WhatsApp</button></a>
+</section>
+
+<footer>© 2026 Samba | All Rights Reserved</footer>
+
+<script>
+// HERO ROTATING TEXT
+const roles=["Web Developer","Cybersecurity Specialist","Freelancer","UI/UX Designer"];
+let i=0; const rotatingText=document.querySelector('.rotating-text');
+setInterval(()=>{i=(i+1)%roles.length; rotatingText.textContent=roles[i];},2000);
+
+// SCROLL ANIMATION
+const sectionsEl=document.querySelectorAll('.section, .hero p, .btn-contact, .hero h1');
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+      entry.target.style.opacity=1;
+      entry.target.style.transform='translateY(0)';
+    }
+  });
+},{threshold:0.2});
+sectionsEl.forEach(section=>observer.observe(section));
+
+// SCROLL PROGRESS BAR
+window.addEventListener('scroll',()=>{
+  const scrollTop=document.documentElement.scrollTop;
+  const scrollHeight=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+  const scrollPercent=(scrollTop/scrollHeight)*100;
+  document.getElementById('progress-bar').style.width=scrollPercent+'%';
+});
+
+// LAZY LOAD IMAGES
+const lazyImages=document.querySelectorAll('img.lazy');
+const lazyObserver=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      const img=entry.target;
+      img.src=img.dataset.src;
+      img.classList.remove('lazy');
+      lazyObserver.unobserve(img);
+    }
+  });
+});
+lazyImages.forEach(img=>lazyObserver.observe(img));
+
+// TESTIMONIAL CAROUSEL
+const testimonialEls=document.querySelectorAll('.testimonial');
+const dots=document.querySelectorAll('.testimonial-controls span');
+let current=0;
+function showTestimonial(index){
+  testimonialEls.forEach(t=>t.classList.remove('active'));
+  dots.forEach(d=>d.classList.remove('active'));
+  testimonialEls[index].classList.add('active');
+  dots[index].classList.add('active');
+}
+dots.forEach((dot,i)=>dot.addEventListener('click',()=>{current=i; showTestimonial(i);}));
+setInterval(()=>{current=(current+1)%testimonialEls.length; showTestimonial(current);},5000);
+
+// DARK/LIGHT MODE
+const toggle=document.getElementById('theme-toggle');
+toggle.addEventListener('click',()=>{
+  if(getComputedStyle(document.body).backgroundColor==='rgb(15, 23, 42)'){
+    document.body.style.background='var(--bg-light)';
+    document.body.style.color='var(--text-dark)';
+    toggle.className='ri-moon-line theme-toggle';
+  } else{
+    document.body.style.background='var(--bg-dark)';
+    document.body.style.color='var(--text-light)';
+    toggle.className='ri-sun-line theme-toggle';
+  }
+});
+
+// PARTICLE BACKGROUND
+const canvas=document.getElementById('particles');
+const ctx=canvas.getContext('2d');
+canvas.width=window.innerWidth; canvas.height=window.innerHeight;
+const particlesArray=[];
+class Particle{
+  constructor(){
+    this.x=Math.random()*canvas.width;
+    this.y=Math.random()*canvas.height;
+    this.size=Math.random()*3+1;
+    this.speedX=Math.random()*1-0.5;
+    this.speedY=Math.random()*1-0.5;
+  }
+  update(){this.x+=this.speedX; this.y+=this.speedY;
+    if(this.x>canvas.width)this.x=0;
+    if(this.x<0)this.x=canvas.width;
+    if(this.y>canvas.height)this.y=0;
+    if(this.y<0)this.y=canvas.height;
+  }
+  draw(){ctx.fillStyle='rgba(56,189,248,0.7)';
+    ctx.beginPath(); ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
+    ctx.fill();
+  }
+}
+for(let i=0;i<120;i++){particlesArray.push(new Particle());}
+function animateParticles(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particlesArray.forEach(p=>{p.update(); p.draw();});
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();
+window.addEventListener('resize',()=>{canvas.width=window.innerWidth; canvas.height=window.innerHeight;});
+</script>
+
+</body>
+</html>
