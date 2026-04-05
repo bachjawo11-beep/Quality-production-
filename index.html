@@ -1,4 +1,4 @@
-<!DOCTYPE html> IDT
+<!DOCTYPE html> 
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -6,6 +6,7 @@
 <title>Quality Production - Ultra Premium Cinematic Portfolio</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
+/* --- General --- */
 body {
   font-family: 'Inter', sans-serif;
   margin: 0;
@@ -17,7 +18,7 @@ body {
   position: relative;
 }
 
-/* Hero Section */
+/* --- Hero Section --- */
 header {
   padding: 6rem 2rem;
   text-align: center;
@@ -42,28 +43,32 @@ header h1 {
 }
 header h1:hover { text-shadow: 0 0 20px #6366f1,0 0 40px #a78bfa,0 0 60px #4f46e5; }
 
-/* Scroll Top */
+/* --- Scroll Top --- */
 #scrollTopBtn { position: fixed; bottom: 30px; right: 100px; width:50px; height:50px; border-radius:50%; border:none; background:#4f46e5; color:white; font-size:24px; cursor:pointer; box-shadow:0 0 20px #4f46e5,0 0 40px #a78bfa; display:none; z-index:1000; transition:transform 0.2s,box-shadow 0.3s;}
 #scrollTopBtn:hover { transform: translateY(-3px); box-shadow:0 0 30px #6366f1,0 0 60px #8b5cf6; }
 
-/* Floating Buttons */
+/* --- Floating Buttons --- */
 #contactWrapper { position: fixed; bottom:30px; right:30px; display:flex; flex-direction:column; gap:10px; z-index:1000;}
 .contact-btn { background: linear-gradient(135deg,#4f46e5,#a78bfa); color:white; border:none; border-radius:50px; padding:15px 20px; font-weight:bold; cursor:pointer; display:flex; align-items:center; gap:8px; box-shadow:0 0 20px #4f46e5,0 0 40px #a78bfa; overflow:visible; transition:transform 0.2s, box-shadow 0.3s;}
 .contact-btn:hover { transform: translateY(-3px); box-shadow:0 0 30px #6366f1,0 0 60px #8b5cf6; }
 .sub-btns { display:flex; flex-direction:column; gap:10px; margin-bottom:10px; opacity:0; transform: translateX(50px); transition:all 0.4s cubic-bezier(0.68,-0.55,0.265,1.55); pointer-events:none;}
 .sub-btns.show { opacity:1; transform: translateX(0); pointer-events:auto;}
-.sub-btns a { background: linear-gradient(135deg,#6366f1,#8b5cf6); color:white; padding:12px 18px; border-radius:50px; font-weight:bold; text-align:center; box-shadow:0 0 15px #6366f1,0 0 30px #8b5cf6; transition:transform 0.2s, box-shadow 0.3s;}
+.sub-btns a { padding:12px 18px; border-radius:50px; font-weight:bold; text-align:center; box-shadow:0 0 15px #6366f1,0 0 30px #8b5cf6; transition:transform 0.2s, box-shadow 0.3s; color:white; display:block; text-decoration:none;}
 .sub-btns a:hover { transform: translateY(-2px); box-shadow:0 0 25px #4f46e5,0 0 50px #a78bfa; }
+/* WhatsApp specific */
+.sub-btns a.whatsapp-btn { background: linear-gradient(135deg,#25D366,#128C7E); animation: floatPulse 2s ease-in-out infinite; box-shadow:0 0 15px #25D366,0 0 30px #128C7E;}
+.sub-btns a.whatsapp-btn:hover { transform: translateY(-5px) scale(1.05); box-shadow:0 0 30px #25D366,0 0 60px #128C7E;}
+@keyframes floatPulse {0% { transform: translateY(0); box-shadow:0 0 15px #25D366,0 0 30px #128C7E; }50% { transform: translateY(-5px); box-shadow:0 0 25px #25D366,0 0 50px #128C7E; }100% { transform: translateY(0); box-shadow:0 0 15px #25D366,0 0 30px #128C7E;}}
 
-/* Canvas Trail */
+/* --- Canvas Trail --- */
 #trailCanvas { position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:999; }
 
-/* Sections */
+/* --- Sections --- */
 section { padding:4rem 2rem; opacity:0; transform:translateY(20px); transition:all 0.8s ease-out;}
 section.visible { opacity:1; transform:translateY(0);}
 h2 { text-align:center; font-size:2.25rem; margin-bottom:2rem; }
 
-/* Projects */
+/* --- Projects --- */
 .projects { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:2rem; max-width:1200px;margin:0 auto;}
 .project-card {
   background:#1a1a2e;
@@ -81,21 +86,36 @@ h2 { text-align:center; font-size:2.25rem; margin-bottom:2rem; }
 .project-card a { color:#4f46e5; font-weight:600; opacity:0; position:absolute; bottom:20px; left:50%; transform:translateX(-50%); transition:opacity 0.3s, transform 0.3s; }
 .project-card:hover { transform:translateY(-10px) scale(1.03); box-shadow:0 0 40px #6366f1,0 0 80px #8b5cf6;}
 .project-card:hover a { opacity:1; transform:translateX(-50%) translateY(-5px); }
-.project-card:hover::before { content:''; position:absolute; top:0; left:0; width:100%; height:100%; background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 80%); pointer-events:none; animation:burst 0.6s ease-out; }
 
-/* Contact Form */
+/* --- Project Hover Particles --- */
+.project-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #a78bfa;
+  pointer-events: none;
+  opacity: 0.8;
+  animation: miniFloat 0.6s forwards;
+}
+@keyframes miniFloat {
+  0% { transform: translate(0,0) scale(1); opacity:0.8;}
+  100% { transform: translate(var(--x), var(--y)) scale(0.5); opacity:0;}
+}
+
+/* --- Contact Form --- */
 #contactForm { max-width:500px; margin:0 auto; display:flex; flex-direction:column; gap:1rem;}
 #contactForm input,#contactForm textarea { padding:0.75rem; border:1px solid #555; border-radius:12px; width:100%; font-size:1rem; background:#0f0f1a; color:#fff; transition:border-color 0.3s, box-shadow 0.3s;}
 #contactForm input:focus,#contactForm textarea:focus { border-color:#4f46e5; box-shadow:0 0 15px #6366f1,0 0 25px #a78bfa; outline:none; }
 #contactForm button { padding:0.75rem; background:linear-gradient(135deg,#4f46e5,#a78bfa); color:white; border:none; border-radius:12px; cursor:pointer; font-weight:bold; font-size:1rem; transition:background 0.3s,transform 0.2s,box-shadow 0.3s; box-shadow:0 0 15px #4f46e5,0 0 30px #a78bfa;}
 #contactForm button:hover { background:linear-gradient(135deg,#6366f1,#8b5cf6); transform:translateY(-3px); box-shadow:0 0 25px #6366f1,0 0 50px #8b5cf6; }
 
-/* Footer */
+/* --- Footer --- */
 footer { text-align:center; padding:2rem; background:#111827; color:white;}
 a.social { margin:0 0.5rem; color:white; text-decoration:none; font-weight:600; transition:color 0.3s,text-shadow 0.3s;}
 a.social:hover { color:#a78bfa; text-shadow:0 0 10px #4f46e5,0 0 20px #a78bfa; }
 
-/* Particles */
+/* --- Particles --- */
 .particle { position:absolute; border-radius:50%; background:rgba(255,255,255,0.2); animation:float 8s linear infinite; }
 @keyframes float {0%{transform:translateY(0) translateX(0); opacity:0.3;}50%{opacity:0.6;}100%{transform:translateY(-600px) translateX(50px);opacity:0;}}
 @keyframes burst {0%{opacity:0.6; transform:scale(0.5);}100%{opacity:0; transform:scale(1.5);}}
@@ -111,6 +131,7 @@ a.social:hover { color:#a78bfa; text-shadow:0 0 10px #4f46e5,0 0 20px #a78bfa; }
   <div class="sub-btns" id="subBtns">
     <a href="mailto:bachjawo11@gmail.com">📧 Email</a>
     <a href="tel:+2207597080">📞 Call</a>
+    <a href="https://wa.me/2207597080" target="_blank" class="whatsapp-btn">💬 WhatsApp</a>
   </div>
   <button class="contact-btn" id="mainContactBtn">💬 Contact Me</button>
 </div>
@@ -148,19 +169,19 @@ a.social:hover { color:#a78bfa; text-shadow:0 0 10px #4f46e5,0 0 20px #a78bfa; }
 </footer>
 
 <script>
-// Hero typing
+// --- Hero typing ---
 const heroText = document.getElementById('heroText');
 const text = "Creating Ultra-Premium Cinematic Websites";
 let index = 0;
 function type(){ if(index<text.length){ heroText.innerHTML+=text.charAt(index); index++; setTimeout(type,100);}}
 type();
 
-// Floating buttons
+// --- Floating buttons ---
 const mainBtn=document.getElementById('mainContactBtn');
 const subBtns=document.getElementById('subBtns');
 mainBtn.addEventListener('click',()=>{subBtns.classList.toggle('show');});
 
-// Fade-in sections & projects
+// --- Fade-in sections & projects ---
 const observer=new IntersectionObserver(entries=>{
 entries.forEach(entry=>{
 if(entry.isIntersecting){
@@ -173,12 +194,12 @@ entry.target.querySelectorAll('.project-card').forEach((card,i)=>{setTimeout(()=
 },{threshold:0.2});
 document.querySelectorAll('section,.projects').forEach(el=>observer.observe(el));
 
-// Scroll to top
+// --- Scroll to top ---
 const scrollBtn=document.getElementById('scrollTopBtn');
 window.onscroll=()=>{scrollBtn.style.display=(window.scrollY>300)?'block':'none';};
 scrollBtn.onclick=()=>{window.scrollTo({top:0,behavior:'smooth'});}
 
-// Background particles
+// --- Background particles ---
 for(let i=0;i<50;i++){
 let particle=document.createElement('div');
 particle.className='particle';
@@ -189,7 +210,7 @@ particle.style.animationDuration=(5+Math.random()*10)+'s';
 document.body.appendChild(particle);
 }
 
-// Neon trail canvas
+// --- Neon trail canvas ---
 const canvas=document.getElementById('trailCanvas');
 const ctx=canvas.getContext('2d');
 canvas.width=window.innerWidth; canvas.height=window.innerHeight;
@@ -215,6 +236,24 @@ const distance=Math.hypot(e.clientX-(rect.left+rect.width/2), e.clientY-(rect.to
 if(distance<100) createTrail(rect.left+rect.width/2, rect.top+rect.height/2);
 });
 window.addEventListener('resize',()=>{canvas.width=window.innerWidth; canvas.height=window.innerHeight;});
+
+// --- Project hover particle bursts ---
+document.querySelectorAll('.project-card').forEach(card=>{
+  card.addEventListener('mouseenter', e=>{
+    for(let i=0;i<10;i++){
+      const particle = document.createElement('div');
+      particle.className = 'project-particle';
+      particle.style.left = e.offsetX + 'px';
+      particle.style.top = e.offsetY + 'px';
+      const angle = Math.random()*2*Math.PI;
+      const radius = Math.random()*30+10;
+      particle.style.setProperty('--x', `${Math.cos(angle)*radius}px`);
+      particle.style.setProperty('--y', `${Math.sin(angle)*radius}px`);
+      card.appendChild(particle);
+      setTimeout(()=>particle.remove(), 600);
+    }
+  });
+});
 </script>
 </body>
   </html>
