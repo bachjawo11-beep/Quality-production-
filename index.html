@@ -1,293 +1,220 @@
-<!DOCTYPE html>
+<!DOCTYPE html> IDT
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quality Production - Cinematic Portfolio</title>
+<title>Quality Production - Ultra Premium Cinematic Portfolio</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-  /* --- General --- */
-  body {
-    font-family: 'Inter', sans-serif;
-    margin: 0;
-    padding: 0;
-    background: #0f0f1a;
-    color: #fff;
-    scroll-behavior: smooth;
-    overflow-x: hidden;
-  }
-  a { text-decoration: none; }
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #0f0f1a;
+  color: #fff;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  position: relative;
+}
 
-  /* --- Scroll to Top Button --- */
-  #scrollTopBtn {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background: #4f46e5;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    font-size: 24px;
-    cursor: pointer;
-    display: none;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    transition: background 0.3s, transform 0.2s;
-    z-index: 1000;
-  }
-  #scrollTopBtn:hover {
-    background: #4338ca;
-    transform: translateY(-3px);
-  }
+/* Hero Section */
+header {
+  padding: 6rem 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(-45deg,#4f46e5,#6366f1,#a78bfa,#4f46e5);
+  background-size: 400% 400%;
+  animation: gradientBG 20s ease infinite, pulseBG 5s ease-in-out infinite alternate;
+}
+@keyframes gradientBG {0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes pulseBG {0%{opacity:0.85}50%{opacity:1}100%{opacity:0.85}}
+.light-rays { position:absolute; top:0; left:-50%; width:200%; height:100%; background: linear-gradient(120deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.05) 100%); transform: skewX(-20deg); animation: sweep 15s linear infinite; pointer-events:none; }
+@keyframes sweep {0%{transform: translateX(-100%) skewX(-20deg);}100%{transform: translateX(100%) skewX(-20deg);} }
+header h1 {
+  font-size: 3rem;
+  min-height: 3rem;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 0.15em solid #fff;
+  text-shadow: 0 0 10px #4f46e5,0 0 20px #a78bfa,0 0 30px #6366f1;
+  transition: text-shadow 0.3s;
+}
+header h1:hover { text-shadow: 0 0 20px #6366f1,0 0 40px #a78bfa,0 0 60px #4f46e5; }
 
-  /* --- Hero Section --- */
-  header {
-    color: white;
-    padding: 6rem 2rem;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    background: linear-gradient(-45deg,#4f46e5,#6366f1,#a78bfa,#4f46e5);
-    background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite;
-  }
-  @keyframes gradientBG {
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
-  }
-  header h1 {
-    font-size: 3rem;
-    min-height: 3rem;
-    white-space: nowrap;
-    overflow: hidden;
-    border-right: 0.15em solid #fff;
-  }
+/* Scroll Top */
+#scrollTopBtn { position: fixed; bottom: 30px; right: 100px; width:50px; height:50px; border-radius:50%; border:none; background:#4f46e5; color:white; font-size:24px; cursor:pointer; box-shadow:0 0 20px #4f46e5,0 0 40px #a78bfa; display:none; z-index:1000; transition:transform 0.2s,box-shadow 0.3s;}
+#scrollTopBtn:hover { transform: translateY(-3px); box-shadow:0 0 30px #6366f1,0 0 60px #8b5cf6; }
 
-  /* --- Sections --- */
-  section {
-    padding: 4rem 2rem;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.8s ease-out;
-  }
-  section.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  h2 {
-    text-align: center;
-    font-size: 2.25rem;
-    margin-bottom: 2rem;
-  }
+/* Floating Buttons */
+#contactWrapper { position: fixed; bottom:30px; right:30px; display:flex; flex-direction:column; gap:10px; z-index:1000;}
+.contact-btn { background: linear-gradient(135deg,#4f46e5,#a78bfa); color:white; border:none; border-radius:50px; padding:15px 20px; font-weight:bold; cursor:pointer; display:flex; align-items:center; gap:8px; box-shadow:0 0 20px #4f46e5,0 0 40px #a78bfa; overflow:visible; transition:transform 0.2s, box-shadow 0.3s;}
+.contact-btn:hover { transform: translateY(-3px); box-shadow:0 0 30px #6366f1,0 0 60px #8b5cf6; }
+.sub-btns { display:flex; flex-direction:column; gap:10px; margin-bottom:10px; opacity:0; transform: translateX(50px); transition:all 0.4s cubic-bezier(0.68,-0.55,0.265,1.55); pointer-events:none;}
+.sub-btns.show { opacity:1; transform: translateX(0); pointer-events:auto;}
+.sub-btns a { background: linear-gradient(135deg,#6366f1,#8b5cf6); color:white; padding:12px 18px; border-radius:50px; font-weight:bold; text-align:center; box-shadow:0 0 15px #6366f1,0 0 30px #8b5cf6; transition:transform 0.2s, box-shadow 0.3s;}
+.sub-btns a:hover { transform: translateY(-2px); box-shadow:0 0 25px #4f46e5,0 0 50px #a78bfa; }
 
-  /* --- Projects --- */
-  .projects {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  .project-card {
-    background: #1a1a2e;
-    border-radius: 16px;
-    padding: 2rem;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    transform: translateY(50px);
-    opacity: 0;
-    transition: all 0.6s ease-out;
-  }
-  .project-card h3 { margin-top: 0; font-size: 1.5rem; color: #a78bfa; }
-  .project-card p { font-size: 1rem; margin-bottom: 1rem; color: #ccc; }
-  .project-card a { color: #4f46e5; font-weight: 600; }
+/* Canvas Trail */
+#trailCanvas { position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:999; }
 
-  /* --- Contact Form --- */
-  #contactForm {
-    max-width: 500px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  #contactForm input,
-  #contactForm textarea {
-    padding: 0.75rem;
-    border: 1px solid #555;
-    border-radius: 12px;
-    width: 100%;
-    font-size: 1rem;
-    background: #0f0f1a;
-    color: #fff;
-    transition: border-color 0.3s, box-shadow 0.3s;
-  }
-  #contactForm input:focus,
-  #contactForm textarea:focus {
-    border-color: #4f46e5;
-    box-shadow: 0 0 10px rgba(79,70,229,0.5);
-    outline: none;
-  }
-  #contactForm button {
-    padding: 0.75rem;
-    background: linear-gradient(135deg,#4f46e5,#a78bfa);
-    color: white;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 1rem;
-    transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
-  }
-  #contactForm button:hover {
-    background: linear-gradient(135deg,#6366f1,#8b5cf6);
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
-  }
+/* Sections */
+section { padding:4rem 2rem; opacity:0; transform:translateY(20px); transition:all 0.8s ease-out;}
+section.visible { opacity:1; transform:translateY(0);}
+h2 { text-align:center; font-size:2.25rem; margin-bottom:2rem; }
 
-  /* --- Footer --- */
-  footer {
-    text-align: center;
-    padding: 2rem;
-    background: #111827;
-    color: white;
-  }
-  a.social {
-    margin: 0 0.5rem;
-    color: white;
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s;
-  }
-  a.social:hover { color: #a78bfa; }
+/* Projects */
+.projects { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:2rem; max-width:1200px;margin:0 auto;}
+.project-card {
+  background:#1a1a2e;
+  border-radius:16px;
+  padding:2rem;
+  box-shadow:0 0 20px #6366f1,0 0 40px #8b5cf6;
+  transform:translateY(50px);
+  opacity:0;
+  transition:all 0.6s ease-out, transform 0.3s, box-shadow 0.3s;
+  position:relative;
+  overflow:hidden;
+}
+.project-card h3 { margin-top:0; font-size:1.5rem; color:#a78bfa; text-shadow:0 0 5px #4f46e5;}
+.project-card p { font-size:1rem; margin-bottom:1rem; color:#ccc;}
+.project-card a { color:#4f46e5; font-weight:600; opacity:0; position:absolute; bottom:20px; left:50%; transform:translateX(-50%); transition:opacity 0.3s, transform 0.3s; }
+.project-card:hover { transform:translateY(-10px) scale(1.03); box-shadow:0 0 40px #6366f1,0 0 80px #8b5cf6;}
+.project-card:hover a { opacity:1; transform:translateX(-50%) translateY(-5px); }
+.project-card:hover::before { content:''; position:absolute; top:0; left:0; width:100%; height:100%; background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 80%); pointer-events:none; animation:burst 0.6s ease-out; }
 
-  /* --- Particles --- */
-  .particle {
-    position: absolute;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.2);
-    animation: float 8s linear infinite;
-  }
-  @keyframes float {
-    0% { transform: translateY(0) translateX(0); opacity: 0.3;}
-    50% { opacity: 0.6; }
-    100% { transform: translateY(-600px) translateX(50px); opacity: 0;}
-  }
+/* Contact Form */
+#contactForm { max-width:500px; margin:0 auto; display:flex; flex-direction:column; gap:1rem;}
+#contactForm input,#contactForm textarea { padding:0.75rem; border:1px solid #555; border-radius:12px; width:100%; font-size:1rem; background:#0f0f1a; color:#fff; transition:border-color 0.3s, box-shadow 0.3s;}
+#contactForm input:focus,#contactForm textarea:focus { border-color:#4f46e5; box-shadow:0 0 15px #6366f1,0 0 25px #a78bfa; outline:none; }
+#contactForm button { padding:0.75rem; background:linear-gradient(135deg,#4f46e5,#a78bfa); color:white; border:none; border-radius:12px; cursor:pointer; font-weight:bold; font-size:1rem; transition:background 0.3s,transform 0.2s,box-shadow 0.3s; box-shadow:0 0 15px #4f46e5,0 0 30px #a78bfa;}
+#contactForm button:hover { background:linear-gradient(135deg,#6366f1,#8b5cf6); transform:translateY(-3px); box-shadow:0 0 25px #6366f1,0 0 50px #8b5cf6; }
 
+/* Footer */
+footer { text-align:center; padding:2rem; background:#111827; color:white;}
+a.social { margin:0 0.5rem; color:white; text-decoration:none; font-weight:600; transition:color 0.3s,text-shadow 0.3s;}
+a.social:hover { color:#a78bfa; text-shadow:0 0 10px #4f46e5,0 0 20px #a78bfa; }
+
+/* Particles */
+.particle { position:absolute; border-radius:50%; background:rgba(255,255,255,0.2); animation:float 8s linear infinite; }
+@keyframes float {0%{transform:translateY(0) translateX(0); opacity:0.3;}50%{opacity:0.6;}100%{transform:translateY(-600px) translateX(50px);opacity:0;}}
+@keyframes burst {0%{opacity:0.6; transform:scale(0.5);}100%{opacity:0; transform:scale(1.5);}}
 </style>
 </head>
 <body>
+<canvas id="trailCanvas"></canvas>
+<div class="light-rays"></div>
 
-<!-- Scroll to Top -->
 <button id="scrollTopBtn">&#8679;</button>
 
-<!-- Hero with Typing Effect -->
+<div id="contactWrapper">
+  <div class="sub-btns" id="subBtns">
+    <a href="mailto:bachjawo11@gmail.com">📧 Email</a>
+    <a href="tel:+2207597080">📞 Call</a>
+  </div>
+  <button class="contact-btn" id="mainContactBtn">💬 Contact Me</button>
+</div>
+
 <header>
   <h1 id="heroText"></h1>
 </header>
 
-<!-- Particles -->
-<script>
-  for(let i=0;i<50;i++){
-    let particle = document.createElement('div');
-    particle.className='particle';
-    particle.style.width = particle.style.height = Math.random()*6 + 4 + 'px';
-    particle.style.left = Math.random()*100 + 'vw';
-    particle.style.top = Math.random()*100 + 'vh';
-    particle.style.animationDuration = (5+Math.random()*10)+'s';
-    document.body.appendChild(particle);
-  }
-</script>
-
-<!-- Projects Section -->
 <section id="projects">
-  <h2>My Projects</h2>
-  <div class="projects">
-    <div class="project-card">
-      <h3>Project One</h3>
-      <p>Beautiful responsive website built with HTML, CSS, and JavaScript.</p>
-      <a href="#">View Project</a>
-    </div>
-    <div class="project-card">
-      <h3>Project Two</h3>
-      <p>Interactive web app with modern frontend techniques and animations.</p>
-      <a href="#">View Project</a>
-    </div>
-    <div class="project-card">
-      <h3>Project Three</h3>
-      <p>Fully functional e-commerce website with payment integration.</p>
-      <a href="#">View Project</a>
-    </div>
-  </div>
+<h2>My Projects</h2>
+<div class="projects">
+<div class="project-card"><h3>Project One</h3><p>Beautiful responsive website built with HTML, CSS, and JavaScript.</p><a href="#">View Project</a></div>
+<div class="project-card"><h3>Project Two</h3><p>Interactive web app with modern frontend techniques and animations.</p><a href="#">View Project</a></div>
+<div class="project-card"><h3>Project Three</h3><p>Fully functional e-commerce website with payment integration.</p><a href="#">View Project</a></div>
+</div>
 </section>
 
-<!-- Contact Section -->
 <section id="contact" style="background:#0f0f1a;">
-  <h2>Contact Me</h2>
-  <form id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-    <label for="name">Name</label>
-    <input type="text" id="name" name="name" placeholder="Your Name" required>
-    <label for="email">Email</label>
-    <input type="email" id="email" name="email" placeholder="Your Email" required>
-    <label for="message">Message</label>
-    <textarea id="message" name="message" placeholder="Your Message" required></textarea>
-    <button type="submit">Send Message</button>
-  </form>
+<h2>Contact Me</h2>
+<p style="text-align:center;color:#ccc;margin-bottom:1rem;">
+📧 <a href="mailto:bachjawo11@gmail.com" style="color:#4f46e5;">bachjawo11@gmail.com</a> | 
+📞 <a href="tel:+2207597080" style="color:#4f46e5;">+220 7597080</a>
+</p>
+<form id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+<input type="text" name="name" placeholder="Your Name" required>
+<input type="email" name="email" placeholder="Your Email" required>
+<textarea name="message" placeholder="Your Message" required></textarea>
+<button type="submit">Send Message</button>
+</form>
 </section>
 
-<!-- Footer -->
 <footer>
-  <p>&copy; 2026 Quality Production. All rights reserved.</p>
-  <div>
-    <a class="social" href="#">GitHub</a>
-    <a class="social" href="#">LinkedIn</a>
-    <a class="social" href="#">Twitter</a>
-  </div>
+<p>&copy; 2026 Quality Production. All rights reserved.</p>
+<p>📧 bachjawo11@gmail.com | 📞 +220 7597080</p>
 </footer>
 
 <script>
-  // Typing Hero Effect
-  const heroText = document.getElementById('heroText');
-  const text = "Creating Ultra-Premium Cinematic Websites";
-  let index = 0;
-  function type(){
-    if(index < text.length){
-      heroText.innerHTML += text.charAt(index);
-      index++;
-      setTimeout(type, 100);
-    }
-  }
-  type();
+// Hero typing
+const heroText = document.getElementById('heroText');
+const text = "Creating Ultra-Premium Cinematic Websites";
+let index = 0;
+function type(){ if(index<text.length){ heroText.innerHTML+=text.charAt(index); index++; setTimeout(type,100);}}
+type();
 
-  // Email Form
-  const form = document.getElementById('contactForm');
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
-    fetch(form.action, {method:'POST', body:new FormData(form), headers:{'Accept':'application/json'}})
-    .then(r=>{if(r.ok){alert('Thank you! Your message has been sent.');form.reset();}else{alert('Oops! There was a problem.');}})
-    .catch(()=>alert('Oops! There was a problem.'));
-  });
+// Floating buttons
+const mainBtn=document.getElementById('mainContactBtn');
+const subBtns=document.getElementById('subBtns');
+mainBtn.addEventListener('click',()=>{subBtns.classList.toggle('show');});
 
-  // Fade-in sections and project cards
-  const observer = new IntersectionObserver(entries=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting){
-        entry.target.classList.add('visible');
-        if(entry.target.classList.contains('projects')){
-          entry.target.querySelectorAll('.project-card').forEach((card,i)=>{
-            setTimeout(()=>{card.style.transform='translateY(0)';card.style.opacity='1';}, i*200);
-          });
-        }
-      }
-    });
-  },{threshold:0.2});
-  document.querySelectorAll('section, .projects').forEach(el=>observer.observe(el));
+// Fade-in sections & projects
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.classList.add('visible');
+if(entry.target.classList.contains('projects')){
+entry.target.querySelectorAll('.project-card').forEach((card,i)=>{setTimeout(()=>{card.style.transform='translateY(0)'; card.style.opacity='1';}, i*200);});
+}
+}
+});
+},{threshold:0.2});
+document.querySelectorAll('section,.projects').forEach(el=>observer.observe(el));
 
-  // Scroll to Top Button
-  const scrollBtn = document.getElementById('scrollTopBtn');
-  window.onscroll = ()=>{if(window.scrollY>300){scrollBtn.style.display='block';}else{scrollBtn.style.display='none';}};
-  scrollBtn.onclick = ()=>{window.scrollTo({top:0,behavior:'smooth'});}
+// Scroll to top
+const scrollBtn=document.getElementById('scrollTopBtn');
+window.onscroll=()=>{scrollBtn.style.display=(window.scrollY>300)?'block':'none';};
+scrollBtn.onclick=()=>{window.scrollTo({top:0,behavior:'smooth'});}
+
+// Background particles
+for(let i=0;i<50;i++){
+let particle=document.createElement('div');
+particle.className='particle';
+particle.style.width=particle.style.height=Math.random()*6+4+'px';
+particle.style.left=Math.random()*100+'vw';
+particle.style.top=Math.random()*100+'vh';
+particle.style.animationDuration=(5+Math.random()*10)+'s';
+document.body.appendChild(particle);
+}
+
+// Neon trail canvas
+const canvas=document.getElementById('trailCanvas');
+const ctx=canvas.getContext('2d');
+canvas.width=window.innerWidth; canvas.height=window.innerHeight;
+let trailParticles=[];
+function createTrail(x,y){ trailParticles.push({x,y,alpha:1,size:5+Math.random()*5});}
+function animateTrail(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+for(let i=0;i<trailParticles.length;i++){
+let p=trailParticles[i];
+ctx.beginPath();
+ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+ctx.fillStyle=`rgba(111,66,245,${p.alpha})`;
+ctx.fill();
+p.alpha-=0.02; p.size*=0.95;
+if(p.alpha<=0) trailParticles.splice(i,1), i--;
+}
+requestAnimationFrame(animateTrail);
+}
+animateTrail();
+document.addEventListener('mousemove',e=>{
+const rect=mainBtn.getBoundingClientRect();
+const distance=Math.hypot(e.clientX-(rect.left+rect.width/2), e.clientY-(rect.top+rect.height/2));
+if(distance<100) createTrail(rect.left+rect.width/2, rect.top+rect.height/2);
+});
+window.addEventListener('resize',()=>{canvas.width=window.innerWidth; canvas.height=window.innerHeight;});
 </script>
-
 </body>
-      </html>
+  </html>
